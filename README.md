@@ -70,3 +70,4 @@ Camera settings can be made in two ways;
       
       Run the camera node with the new param file.
       `ros2 run arena_camera arena_camera_node_exe --ros-args --params-file <your_workspace>/src/arena_camera/param/arena_camera_node.yaml`
+check branch rules
