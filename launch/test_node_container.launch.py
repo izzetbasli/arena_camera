@@ -34,6 +34,9 @@ import yaml
 
 
 def generate_launch_description():
+    '''
+    Function description
+    '''
     launch_arguments = []
 
     context = LaunchContext()
