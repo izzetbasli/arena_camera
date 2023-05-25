@@ -1,0 +1,32 @@
+name: Python package
+
+on: [push]
+
+jobs:
+  build:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [ ubuntu-latest ]
+        python-version: ["3.8", "3.9", "3.10"]
+        rosdistro:
+          - humble
+        container-suffix:
+          - ""
+          - -cuda
+        include:
+          - rosdistro: humble
+            container: ghcr.io/autowarefoundation/autoware-universe:humble-latest
+            build-depends-repos: build_depends.repos
+
+    steps:
+      - uses: actions/checkout@v3
+      - name: ROS 2 CI Action
+        uses: ros-tooling/action-ros-ci@0.3.0
+      - name: Set up Python ${{ matrix.python-version }}
+        uses: actions/setup-python@v4
+        with:
+          python-version: ${{ matrix.python-version }}
+
+      - name: Install dependencies
+        run: python -m pip install --upgrade pip setuptools wheel && pip install pytest
